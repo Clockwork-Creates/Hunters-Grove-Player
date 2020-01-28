@@ -6,6 +6,7 @@ public class FusedThrowable : MonoBehaviour
 {
     public Transform throwRot;
     public Transform placePos;
+    public GameObject cookGO;
     public float throwForce;
     public float explosionDelay;
     public Vector3 offset;
@@ -52,6 +53,7 @@ public class FusedThrowable : MonoBehaviour
     {
         remainingDelay = explosionDelay;
         lit = true;
+        cookGO.SetActive(true);
     }
 
     void Throw ()

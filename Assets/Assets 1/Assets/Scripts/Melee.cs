@@ -15,6 +15,7 @@ public class Melee : MonoBehaviour
     public GameObject fleshFX;
     public GameObject dirtFX;
     public Condition condition;
+    public LayerMask raycastLayers;
     Animator anim;
     Camera fpCam;
     bool canAttack;
@@ -43,7 +44,7 @@ public class Melee : MonoBehaviour
         yield return new WaitForSeconds(hitDelay);
 
         RaycastHit hit;
-        if (Physics.Raycast(fpCam.transform.position, fpCam.transform.forward, out hit, range))
+        if (Physics.Raycast(fpCam.transform.position, fpCam.transform.forward, out hit, range, raycastLayers))
         {
             if (hit.transform.GetComponent<Health>() != null)
             {

@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
 
     public bool canMove;
     public bool canNotBeAimed = true;
+    public bool crouch;
 
     private CharacterController controller;
     private Vector3 velocity;
@@ -59,7 +60,22 @@ public class PlayerController : MonoBehaviour
             CalculateMovement();
         }
 
-            isGrounded = Physics.CheckSphere(groundCheck.position, groundCheckRadius, groundLayers);
+        if (Input.GetKeyDown(KeyCode.LeftControl))
+        {
+            crouch = true;
+            controller.height = 1;
+            controller.center = new Vector3(0, -.5f, 0);
+            Camera.main.transform.position -= new Vector3(0, 0.5f, 0);
+        }
+        if (Input.GetKeyUp(KeyCode.LeftControl))
+        {
+            crouch = false;
+            controller.height = 2;
+            controller.center = new Vector3(0, 0, 0);
+            Camera.main.transform.position += new Vector3(0, 0.5f, 0);
+        }
+
+        isGrounded = Physics.CheckSphere(groundCheck.position, groundCheckRadius, groundLayers);
             if (isGrounded && velocity.y < 0)
             {
                 velocity.y = -2;

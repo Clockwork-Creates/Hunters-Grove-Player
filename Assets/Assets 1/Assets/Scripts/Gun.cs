@@ -27,9 +27,12 @@ public class Gun : MonoBehaviour
     public GameObject woodFX;
     public GameObject fleshFX;
     public GameObject dirtFX;
+    public LayerMask raycastLayers;
     public Condition condition;
     Animator anim;
     Camera fpCam;
+
+    bool useForce;
 
     void Start()
     {
@@ -81,7 +84,7 @@ public class Gun : MonoBehaviour
         {
             sp.eulerAngles = new Vector3(Random.Range(fpCam.transform.eulerAngles.x - maxspread, fpCam.transform.eulerAngles.x + maxspread), Random.Range(fpCam.transform.eulerAngles.y - maxspread, fpCam.transform.eulerAngles.y + maxspread), 0);
             RaycastHit hit;
-            if (Physics.Raycast(sp.transform.position, sp.transform.forward, out hit, range))
+            if (Physics.Raycast(sp.transform.position, sp.transform.forward, out hit, range, raycastLayers))
             {
                 if (hit.transform.GetComponent<Health>() != null)
                 {
@@ -119,7 +122,19 @@ public class Gun : MonoBehaviour
 
                 if (hit.transform.GetComponent<Rigidbody>() != null)
                 {
-                    hit.transform.GetComponent<Rigidbody>().AddForce(fpCam.transform.forward * force);
+                    useForce = true;
+                }
+                if (useForce)
+                {
+                    if (hit.transform.tag == "Flesh")
+                    {
+                        hit.transform.GetComponent<Rigidbody>().AddForce(-transform.forward * 3 * force);
+                    } else
+                    {
+                        hit.transform.GetComponent<Rigidbody>().AddForce(-transform.forward * force);
+                    }
+                    
+                    useForce = false;
                 }
             }
         } }

@@ -197,7 +197,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5311255089388537700
 Transform:
   m_ObjectHideFlags: 0
@@ -305,6 +305,9 @@ MonoBehaviour:
   fleshFX: {fileID: 1000013169864706, guid: e5a3d6da48298a0458c1990f58c27069, type: 3}
   dirtFX: {fileID: 1000010191825552, guid: f2a7c68d9e200e7468583ccca6663af4, type: 3}
   condition: 5
+  raycastLayers:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!65 &5306680745314585652
 BoxCollider:
   m_ObjectHideFlags: 0
